@@ -3,6 +3,6 @@ import { createUnsecureRoute } from "../core/route";
 
 export const authenticationsRoute = createUnsecureRoute();
 
-authenticationsRoute.use("*", (context) => {
+authenticationsRoute.use((context) => {
   return betterAuthClient.handler(context.req.raw);
 });

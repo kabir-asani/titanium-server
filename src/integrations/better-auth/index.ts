@@ -25,6 +25,10 @@ export const betterAuthClient = betterAuth({
       enabled: true,
       maxAge: 15 * 60,
     },
+    cookieOptions: {
+      sameSite: "none",
+      secure: true,
+    },
   },
   verification: {
     modelName: "Verification",
