@@ -6,10 +6,17 @@ import { serverUrl, webClientUrl } from "../../utils/environment";
 export const betterAuthClient = betterAuth({
   baseURL: serverUrl,
   basePath: "/authentications",
-  trustedOrigins: [serverUrl, webClientUrl],
   database: prismaAdapter(prismaClient, {
     provider: "postgresql",
   }),
+  trustedOrigins: [serverUrl, webClientUrl],
+  advanced: {
+    defaultCookieAttributes: {
+      secure: true,
+      sameSite: "none",
+      httpOnly: true,
+    },
+  },
   emailAndPassword: {
     enabled: true,
   },
@@ -24,10 +31,6 @@ export const betterAuthClient = betterAuth({
     cookieCache: {
       enabled: true,
       maxAge: 15 * 60,
-    },
-    cookieOptions: {
-      sameSite: "none",
-      secure: true,
     },
   },
   verification: {
