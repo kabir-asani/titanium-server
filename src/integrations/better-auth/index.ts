@@ -16,6 +16,7 @@ export const betterAuthClient = betterAuth({
       sameSite: "none",
       httpOnly: true,
     },
+    useSecureCookies: true,
   },
   emailAndPassword: {
     enabled: true,
