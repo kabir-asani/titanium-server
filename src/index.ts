@@ -4,8 +4,11 @@ import { authenticationsRoute } from "./routes/authentications";
 import { postsRoute } from "./routes/posts";
 import { cors } from "hono/cors";
 import { webClientUrl } from "./utils/environment";
+import { logger } from "hono/logger";
 
 const allRoutes = new Hono();
+
+allRoutes.use(logger());
 
 allRoutes.use(
   cors({
