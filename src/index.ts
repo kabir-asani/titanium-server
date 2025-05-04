@@ -2,8 +2,21 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { authenticationsRoute } from "./routes/authentications";
 import { postsRoute } from "./routes/posts";
+import { cors } from "hono/cors";
+import { webClientUrl } from "./utils/environment";
 
 const allRoutes = new Hono();
+
+allRoutes.use(
+  cors({
+    origin: [webClientUrl],
+    allowHeaders: ["Content-Type", "Authorization"],
+    allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    exposeHeaders: ["Content-Length"],
+    maxAge: 600,
+    credentials: true,
+  }),
+);
 
 allRoutes.route("/authentications", authenticationsRoute);
 
